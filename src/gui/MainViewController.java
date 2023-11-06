@@ -16,7 +16,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
-public class MainViewController implements Initializable{
+
+public class MainViewController implements Initializable {
 
 	@FXML
 	private MenuItem menuItemSeller;
@@ -26,12 +27,12 @@ public class MainViewController implements Initializable{
 	
 	@FXML
 	private MenuItem menuItemAbout;
-	
+
 	@FXML
 	public void onMenuItemSellerAction() {
 		System.out.println("onMenuItemSellerAction");
 	}
-	
+
 	@FXML
 	public void onMenuItemDepartmentAction() {
 		System.out.println("onMenuItemDepartmentAction");
@@ -39,11 +40,15 @@ public class MainViewController implements Initializable{
 	
 	@FXML
 	public void onMenuItemAboutAction() {
+<<<<<<< HEAD
 		System.out.println("onMenuItemAboutAction");
+=======
+>>>>>>> e5b3c9661b2a8b75f3aa5a02c43e0d940e043b9b
 		loadView("/gui/About.fxml");
 	}
 	
 	@Override
+<<<<<<< HEAD
 	public void initialize(URL url, ResourceBundle rb) {
 	}
 
@@ -66,6 +71,27 @@ public class MainViewController implements Initializable{
 		}
 		
 	
+=======
+	public void initialize(URL uri, ResourceBundle rb) {
+>>>>>>> e5b3c9661b2a8b75f3aa5a02c43e0d940e043b9b
 	}
-
+	
+	private synchronized void loadView(String absoluteName) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+			VBox newVBox = loader.load();
+			
+			Scene mainScene = Main.getMainScene();
+			VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent();
+			
+			Node mainMenu = mainVBox.getChildren().get(0);
+			mainVBox.getChildren().clear();
+			mainVBox.getChildren().add(mainMenu);
+			mainVBox.getChildren().addAll(newVBox.getChildren());
+			
+		}
+		catch (IOException e) {
+			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
+		}
+	}	
 }
